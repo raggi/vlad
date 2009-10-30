@@ -58,15 +58,16 @@ module Vlad
   # Rakefile. YAY for simple and clean!
   def self.load options = {}
     options = {:config => options} if String === options
-    order = [:core, :app, :config, :scm, :web]
+    order = [:core, :type, :app, :config, :scm, :web]
     order += options.keys - order
 
     recipes = {
       :app    => :passenger,
+      :type   => :rails,
       :config => 'config/deploy.rb',
       :core   => :core,
       :scm    => :subversion,
-      :web    => :apache,
+      :web    => :apache
     }.merge(options)
 
     order.each do |flavor|
